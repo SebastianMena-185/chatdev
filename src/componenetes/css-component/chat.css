@@ -1,0 +1,101 @@
+.cajamenu{
+    /* position:absolute;
+    height: 100px; */
+    list-style:none;
+        
+}
+.cajaText{
+    background-color: white;
+    width: 100%;
+    height: 500px;
+    margin-left: -5px;
+    border-radius: 7px 7px 7px 7px;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    border: 0px solid #000000;
+}
+#inferior{
+ 
+    position:absolute; /*El div será ubicado con relación a la pantalla*/
+    left:0px; /*A la derecha deje un espacio de 0px*/
+    right:0px; /*A la izquierda deje un espacio de 0px*/
+    bottom:0px; /*Abajo deje un espacio de 0px*/
+   /* height:50px; alto del div*/
+    z-index:0;
+     }
+
+.cajaContactos{
+    width:100%;
+    overflow: auto;
+    height: 380px;
+    
+}
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+
+.cajaContactos::-webkit-scrollbar {
+    -webkit-appearance: none;
+   
+}
+
+.cajaContactos::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.cajaContactos::-webkit-scrollbar-button:increment,.cajaContactos::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.cajaContactos::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.cajaContactos::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.cajaContactos::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+.cajasText{
+    border-radius: 30px !important;
+}
+.invisible{
+    display: none;
+}
+.img{
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+    widows: 70px;
+}
+.cajaflotante{
+    margin-left: -97px;
+}
+.menu li ul {
+    display: none;
+    position: absolute !important;
+   
+}
+.menu li:hover > ul{
+    text-align: center;
+    display: block;
+   
+    position: absolute;
+}
+.cajaSalir{
+    top: 8px;
+    margin-left: -136px;
+    text-align: center;
+   
+    border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+}
+.marginlef{
+    margin-left: '-72px'
+}
