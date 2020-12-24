@@ -10,7 +10,7 @@
 .margenes-bottom50{
     margin-bottom: 50px;
 }
-.img{
+.imgg{
     
     
   
@@ -52,4 +52,10 @@
    border-radius: 0px 0px 800px 800px/   0px 0px 165px 167px;
     /*box-shadow:0px 0px 6px 0px #f4f4f2;*/
 
+}
+.coloramarillo{
+    background-color:rgb(255, 243, 205);
+}
+.yo{
+    border-radius: 50%;
 }

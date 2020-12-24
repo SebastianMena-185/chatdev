@@ -1,43 +1,130 @@
 import React from "react";
 import "./componenetes/css-component/home.css";
-
+import Logo from './componenetes/img/logohome.png';
+import Yo from "./componenetes/img/perfilSebastián.jpg";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
+var usuarionuevo = null;
 class Home extends React.Component{
+  
   state = {
+      user :{
+        photoURL:'',
+      displayName:'',
+      email:''
+    },
     color : "#1f6f8b",
     color2 :"#e6d5b8",
     color3: "#e8e8e8",
-    color4: "#db6400"
+    color4: "#db6400",
+    usuarionuevo: null,
+    result:{}
   }
+
+    componentWillMount(){
+      let bandera = false;
+      firebase.auth().onAuthStateChanged(user =>{
+        this.setState({user});
+        
+        if (this.state.user) {
+          console.log(user)
+              if(this.state.usuarionuevo != null){ 
+                if(this.state.usuarionuevo == true){
+                 let email= this.state.user.email;
+         email= email.replace("@","");
+         email=  email.replace(".","");
+         email= email.replace("$","");
+         email= email.toString();
+            const usuario = {
+                emailll:this.state.user.email,
+            displayName:this.state.user.displayName,
+            photoURL:this.state.user.photoURL,
+            
+            }
+        console.log(email);
+        if(email != ""){
+          const db = firebase.database();
+          const dbRef = db.ref('usuarios/' );
+          const newusuario = dbRef.child(email);
+          newusuario.set(usuario); 
+            this.props.history.push("/chat?"+this.state.user.email);
+        }else{console.log('llega vacio')} 
+                }else{
+                  this.props.history.push("/chat?"+this.state.user.email);
+                } 
+                  
+          
+    
+          
+           
+         
+        }}
+      
+      })
+    }
+  
+  handleGoogle = e =>{
+    e.preventDefault();
+
+
+
+    let bandera =false;
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(result => {
+      console.log(result.additionalUserInfo.isNewUser);
+      this.setState({usuarionuevo : result.additionalUserInfo.isNewUser});
+     
+
+
+       
+
+      // This gives you a Google Access Token. You can use it to access the Google API..child(userId)
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log('el error es:'+errorMessage)
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  }
+  
     render(){
         return (
             <React.Fragment >
-                <div className="portada">
-                  
-                </div>
-                <div  style={{ background: 	this.state.color3}} className="margenes-bottom100 card  superposicion mb-3" >
-  <div className="card-header">Bienvenidxs!</div>
-                        
+                 <div className="container">
+                    <div className="row ">
+                    <div className="col-6">
+                      <img  src={Logo}></img>
+                    </div>
+                    <div className="col-4 margenes-top50">
 
-  <form className="">
-  <div className="form-group">
-    <label >Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div className="form-group">
-    <label >Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1"/>
-  </div>
-  <div className="form-group form-check">
-    <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-    <label className="form-check-label" >Check me out</label>
-  </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
-</form>
+                      <div className="alert alert-warning " role="alert">
+                      <div className="center">
+                        <img width="150px" src={Yo} className="yo"></img>
+                      </div>
+                      <br/>
+  <h4 className="alert-heading">Bienvenidxs!</h4>
+  <p>Mi nombre es Sebastián Mena. Soy un desarrollador junior sin experciencia en el mundo de la tecnologia, hice este chat para que puedan ver de lo que soy capaz, espero les guste.</p>
+  <hr/>
+  <p className="mb-0">Formas de Loguearse.</p>
+  <br/>
+<form className="">
 
+                        <button type="submit" onClick={this.handleGoogle} className="btn btn-primary yo">Google</button>
+                      </form></div>
+                    </div>
 
+</div></div>
 
-</div>
 
                 <div className="container margenes-top300 margenes-bottom100">
                     <div className="row ">
@@ -75,7 +162,7 @@ class Home extends React.Component{
     </div>
   </div>
 </div>
-                
+
 
 
 
